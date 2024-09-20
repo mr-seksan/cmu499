@@ -13,11 +13,11 @@ const port = 3000
 
 
 const pg = new Pool({
-    host: "localhost",
+    host: "postgres",
     user: 'postgres',
     password: "1234",
     database: "154499",
-    port: 5432
+    port: 5436 //5436 5432
 });
 app.use(express.json());
 
