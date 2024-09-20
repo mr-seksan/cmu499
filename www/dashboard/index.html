@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="pastel">
+<!-- light   lofi sunset black pastel-->
+<link rel="icon" type="image/png" sizes="16x16" href="">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <title>AOD</title>
+
+    <!-- Ant Design CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/antd/4.21.1/antd.min.css">
+
+
+
+    <!-- <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.css" rel="stylesheet" /> -->
+    <!------------------------------------------- daisyui ---------------------------------------->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <!-------------------------------------------leaflet ----------------------------------------->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.2/echarts.min.css">
+    <!------------------------------------------  .CSS -------------------------------------------->
+    <link rel="stylesheet" href="./style.css">
+    <!------------------------------------------------------------------------------------------------>
+</head>
+
+<body>
+    <div id="loading-screen" class="fixed inset-0 bg-white flex items-center justify-center z-50">
+        <span class="loading loading-dots loading-lg"></span>
+    </div>
+
+    <!------------------------------------------ Navbar -------------------------------------------->
+    <div class="navbar bg-base-100">
+        <div class="navbar-start">
+            <div class="dropdown">
+                <div id="dropdown-toggle" tabindex="0" role="button" class="btn btn-ghost btn-circle">
+                    <svg id="icon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path id="icon-path" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </div>
+                <ul id="dropdown-menu" tabindex="0"
+                    class="menu menu-sm dropdown-content bg-base-100 z-[1] mt-3 w-52 shadow dropdown-content-custom hidden">
+                    <li><a href="/index.html">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="size-4">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+                            </svg>
+                            Home</a></li>
+                    <li><a href="/dashboard/index.html">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="size-4">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M6 20.25h12m-7.5-3v3m3-3v3m-10.125-3h17.25c.621 0 1.125-.504 1.125-1.125V4.875c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125Z" />
+                            </svg>
+                            <span class="text-inline">Dashboard</span></a></li>
+                    <li><a href="/rmutl/index.html">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="size-4">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
+                            </svg>
+                            <span class="text-inline">RMUTL</span></a></li>
+                    <li><a href="/eng/index.html">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="size-4">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
+                            </svg>
+                            <span class="text-inline">Engineering CMU</span></a></li>
+                    <li><a href="/maehia/index.html">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="size-4">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
+                            </svg>
+                            <span class="text-inline">Maehia CMU</span></a></li>
+                    <li><a href="/uniserv/index.html">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="size-4">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
+                            </svg>
+                            <span class="text-inline">Uniserv CMU</span></a></li>
+
+                </ul>
+            </div>
+        </div>
+        <div class="navbar-center">
+            <a href="/index.html" class="btn btn-ghost text-xl">#Mr.Seksan</a>
+        </div>
+        <div class="navbar-end">
+        </div>
+    </div>
+
+
+
+
+    <!-- <div class="w-screen h-screen bg-[#3abef9] flex justify-center">
+    </div> -->
+
+
+
+    <div class="dashboard-container">
+
+        <main class="main-content">
+
+            <header class="header text-xl font-bold">
+                <a>Dashboard</a>
+            </header>
+
+            <div class="flex w-full flex-col">
+
+                <div class="divider"></div>
+
+            </div>
+
+            <!-- <section class="stats-grid">
+
+                <div class="stat-box">
+                    <h3>widget 1</h3>
+                </div>
+
+                <div class="stat-box">
+                    <h3>widget 2</h3>
+                </div>
+
+                <div class="stat-box">
+                    <h3>widget 3</h3>
+                </div>
+
+                <div class="stat-box">
+                    <h3>widget 4</h3>
+                </div>
+
+            </section> -->
+            <section class="stats-grid">
+
+
+                <div class="widget widget-1">
+                    <div id="gauge" style=" width: 200px;"></div>
+                    <div class="widget-details" id="st_rmutl"></div>
+                </div>
+
+
+
+                <div class="widget widget-2">
+                    <div id="gauge2" style=" width: 200px;"></div>
+                    <div class=" widget-details" id="st_engi"></div>
+                </div>
+
+
+
+                <div class="widget widget-3">
+                    <div id="gauge3" style=" width: 200px;"></div>
+                    <div class="widget-details" id="st_maehia"></div>
+                </div>
+
+
+
+                <div class="widget widget-4">
+                    <div id="gauge4" style=" width: 200px;"></div>
+                    <div class="widget-details" id="st_uni"></div>
+                </div>
+
+            </section>
+
+
+            <div class="controller-chart-hour">
+                <div class="controller-text">
+                    ค่าฝุ่นละอองลอยรายชั่วโมง
+                </div>
+                <div class="datepicker-custom animatable fadeInUp">
+                    <div id="root" onchange="datepicker(event)"></div>
+                </div>
+
+            </div>
+
+
+
+
+            <section class="graph-section">
+                <div class="chart-hour">
+                    <div class="graph-placeholder" id="chart_hour"></div>
+                </div>
+
+                <div class="chart-circle">
+                    <div class="graph-placeholder" id="chart_circle"></div>
+                </div>
+
+            </section>
+
+
+            <div class="controller-chart-hour">
+                <div class="controller-text">
+                    ค่าฝุ่นละอองลอยรายวัน
+                </div>
+
+                <div class="datepicker-custom animatable fadeInUp">
+                    <div id="root" onchange="datepicker(event)"></div>
+                </div>
+
+            </div>
+
+
+            <section class="graph-section">
+                <div class="chart-hour">
+                    <div class="graph-placeholder" id=""></div>
+                </div>
+
+                <div class="chart-circle">
+                    <div class="graph-placeholder" id=""></div>
+                </div>
+
+            </section>
+
+
+            <!-- <section class="graph-section">
+
+
+
+                <div class="graph-box3">
+                    <h3>กราฟ 3</h3>
+                    <div class="graph-placeholder"></div>
+                </div>
+
+                <div class="graph-box4">
+                    <h3>กราฟ 4</h3>
+                    <div class="graph-placeholder">[กราฟที่นี่]</div>
+                </div>
+
+
+            </section> -->
+
+        </main>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="button-wrapper">
+        <div class="custom-progress-wrap">
+            <div class="custom-progress-circle"></div>
+        </div>
+        <div class="main-button" id="main-button" title="เมนู">
+            <svg id="button-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="size-6">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M12 6.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 12.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 18.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5Z" />
+            </svg>
+            <span class="notification-dot"></span>
+        </div>
+        <div class="child-buttons" id="child-buttons">
+            <div class="child-button btn-home" title="Home">
+                <a href="/index.html">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="size-5">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+                    </svg>
+                </a>
+            </div>
+            <div class="child-button btn-top" id="btn-top" title="Back to top">
+                <a>
+                    <svg viewBox="64 64 896 896" focusable="false" data-icon="vertical-align-top" width="20px"
+                        height="20px" fill="currentColor" aria-hidden="true">
+                        <path
+                            d="M859.9 168H164.1c-4.5 0-8.1 3.6-8.1 8v60c0 4.4 3.6 8 8.1 8h695.8c4.5 0 8.1-3.6 8.1-8v-60c0-4.4-3.6-8-8.1-8zM518.3 355a8 8 0 00-12.6 0l-112 141.7a7.98 7.98 0 006.3 12.9h73.9V848c0 4.4 3.6 8 8 8h60c4.4 0 8-3.6 8-8V509.7H624c6.7 0 10.4-7.7 6.3-12.9L518.3 355z">
+                        </path>
+                    </svg>
+                </a>
+            </div>
+            <div class="child-button btnst" title="RMUTL">
+                <a href="/rmutl/index.html">RMU</a>
+            </div>
+            <div class="child-button btnst" title="Engineering CMU">
+                <a href="/eng/index.html">ENG</a>
+            </div>
+            <div class="child-button btnst" title="Maehia CMU">
+                <a href="/maehia/index.html">Mae</a>
+            </div>
+            <div class="child-button btnst" title="Uniserv CMU">
+                <a href="/uniserv/index.html">Uni</a>
+            </div>
+        </div>
+    </div>
+    <!------------------------------------------- footer ------------------------------------------->
+    <footer class="footer bg-base-100 text-base-content p-10 ">
+        <aside>
+            <svg width="50" height="50" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd"
+                clip-rule="evenodd" class="fill-current">
+                <path
+                    d="M22.672 15.226l-2.432.811.841 2.515c.33 1.019-.209 2.127-1.23 2.456-1.15.325-2.148-.321-2.463-1.226l-.84-2.518-5.013 1.677.84 2.517c.391 1.203-.434 2.542-1.831 2.542-.88 0-1.601-.564-1.86-1.314l-.842-2.516-2.431.809c-1.135.328-2.145-.317-2.463-1.229-.329-1.018.211-2.127 1.231-2.456l2.432-.809-1.621-4.823-2.432.808c-1.355.384-2.558-.59-2.558-1.839 0-.817.509-1.582 1.327-1.846l2.433-.809-.842-2.515c-.33-1.02.211-2.129 1.232-2.458 1.02-.329 2.13.209 2.461 1.229l.842 2.515 5.011-1.677-.839-2.517c-.403-1.238.484-2.553 1.843-2.553.819 0 1.585.509 1.85 1.326l.841 2.517 2.431-.81c1.02-.33 2.131.211 2.461 1.229.332 1.018-.21 2.126-1.23 2.456l-2.433.809 1.622 4.823 2.433-.809c1.242-.401 2.557.484 2.557 1.838 0 .819-.51 1.583-1.328 1.847m-8.992-6.428l-5.01 1.675 1.619 4.828 5.011-1.674-1.62-4.829z">
+                </path>
+            </svg>
+            <p>
+                © Seksan Chanphet.
+                <br />
+                Since 2024
+            </p>
+        </aside>
+
+        <nav>
+            <h6 class="footer-title">Display</h6>
+            <a href="/dashboard/index.html">Dashboard</a>
+        </nav>
+
+        <nav>
+            <h6 class="footer-title">Station</h6>
+            <a href="/rmutl/index.html">RMULT</a>
+            <a href="/eng/index.html">Engineering CMU</a>
+            <a href="maehia/index.html">Maehia CMU</a>
+            <a href="/uniserv/index.html">Uniserv CMU</a>
+
+        </nav>
+        <nav>
+            <h6 class="footer-title">About US</h6>
+            <a class="link link-hover">About Us</a>
+        </nav>
+    </footer>
+
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.7.1.js"
+        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+
+    <!-- dayjs CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.6/dayjs.min.js"></script>
+
+
+    <!-- Moment.js CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+
+    <!-- dayjs -->
+    <script src="https://unpkg.com/dayjs"></script>
+
+    <!-- React -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+    <!-- Ant Design JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/antd/4.21.1/antd.min.js"></script>
+
+
+    <!-- <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script> -->
+    <!-- Tailwindcss -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!-- Echarts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.2/echarts.min.js"></script>
+    <!--------------------------------------------- .JS ---------------------------------------------->
+    <script src="./app.js"></script>
+</body>
+
+</html>
