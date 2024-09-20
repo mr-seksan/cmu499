@@ -6,8 +6,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 
-const { api } = require('./api')
-app.use(api);
+// const { api } = require('./api')
+// app.use(api);
 
 const port = 3000
 
