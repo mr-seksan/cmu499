@@ -294,12 +294,6 @@ app.get("/api/aod/hour/allstation/:datestart", (req, res) => {
 
 
 
-// addadadasdtesttttttt
-
-
-
-
-
 app.listen(port, () => {
     console.log(`http://localhost:${port}`)
 })
