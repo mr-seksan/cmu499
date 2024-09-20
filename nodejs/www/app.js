@@ -794,7 +794,7 @@ const lastupdate_API = async () => {
     const stations = [6, 106, 2004, 4439];
     try {
         const requests = stations.map(station => {
-            const url = `http://localhost:3000/api/aod/lastupdate/${station}`;
+            const url = `/aod/api/aod/lastupdate/${station}`;
             return axios.get(url)
                 .then(res => {
                     return res.data;
@@ -829,7 +829,7 @@ const aod_difference_API = async () => {
     const stations = [6, 106, 2004, 4439];
     try {
         const requests = stations.map(station => {
-            const url = `http://localhost:3000/api/aod/difference/${station}`;
+            const url = `/aod/api/aod/difference/${station}`;
             return axios.get(url)
                 .then(res => {
                     return res.data;

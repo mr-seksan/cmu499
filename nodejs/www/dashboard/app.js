@@ -40,7 +40,7 @@ const aod_difference_API = async () => {
     const stations = [6, 106, 2004, 4439];
     try {
         const requests = stations.map(station => {
-            const url = `http://localhost:3000/api/aod/difference/${station}`;
+            const url = `/aod/api/aod/difference/${station}`;
             return axios.get(url)
                 .then(res => {
                     return res.data;
@@ -72,7 +72,7 @@ const lastupdate_API = async () => {
     const stations = [6, 106, 2004, 4439];
     try {
         const requests = stations.map(station => {
-            const url = `http://localhost:3000/api/aod/lastupdate/${station}`;
+            const url = `/aod/api/aod/lastupdate/${station}`;
             return axios.get(url)
                 .then(res => {
                     return res.data;
@@ -192,7 +192,6 @@ window.addEventListener('load', updateProgressCircle);
 
 //     try {
 //         const station = 106;
-//         const url = `http://localhost:3000/api/select/${date}/${station}`;
 //         const response = await axios.get(url);
 
 //         if (response.status === 200) {
@@ -226,7 +225,7 @@ const all_station_API = async (dateobj) => {
     const { datestart } = dateobj;
 
     try {
-        const url = `http://localhost:3000/api/aod/hour/allstation/${datestart}`;
+        const url = `/aod/api/aod/hour/allstation/${datestart}`;
 
         const response = await axios.get(url);
 
