@@ -22,9 +22,9 @@ const pg = new Pool({
 app.use(express.json());
 
 
-app.use('/', express.static('www'))
+app.use('/aod', express.static('www'))
 
-app.get("/api/", (req, res) => {
+app.get("/aod/api/", (req, res) => {
     res.send("OK")
 })
 
@@ -32,7 +32,7 @@ app.get("/api/", (req, res) => {
 // const fc = require("./api")
 // const { api, a, b, c } = require("./api")
 // app.use(api)
-app.get("/api/database/", (req, res) => {
+app.get("/aod/api/database/", (req, res) => {
     let sql = `SELECT id, station, date, time, image_name, aod::float FROM db_data ORDER BY date, time`;
     pg.query(sql)
         .then(r => {
@@ -42,7 +42,7 @@ app.get("/api/database/", (req, res) => {
 })
 
 
-app.get("/api/aod/lastupdate/:station", (req, res) => {
+app.get("/aod/api/aod/lastupdate/:station", (req, res) => {
     const { station } = req.params;
     const sql = `SELECT id, station, date, time, image_name, aod::float FROM db_data WHERE station = $1 ORDER BY date DESC, time DESC LIMIT 1`;
 
@@ -61,7 +61,7 @@ app.get("/api/aod/lastupdate/:station", (req, res) => {
         });
 });
 
-app.get("/api/aod/difference/:station", (req, res) => {
+app.get("/aod/api/aod/difference/:station", (req, res) => {
     const { station } = req.params;
     const sql = `
     WITH LastTwo AS (
@@ -97,7 +97,7 @@ FROM
 
 
 
-app.get("/api/aod/:station/daily", (req, res) => {
+app.get("/aod/api/aod/:station/daily", (req, res) => {
     const { station } = req.params;
     const validStations = [6, 20, 106, 2004, 4439];
 
@@ -134,7 +134,7 @@ app.get("/api/aod/:station/daily", (req, res) => {
 
 
 
-app.get("/api/aod/:station/avg/daily", (req, res) => {
+app.get("/aod/api/aod/:station/avg/daily", (req, res) => {
     const { station } = req.params;
     const validStations = [6, 20, 106, 2004, 4439];
 
@@ -164,7 +164,7 @@ app.get("/api/aod/:station/avg/daily", (req, res) => {
 
 
 
-app.get("/api/select/:date/:station", (req, res) => {
+app.get("/aod/api/select/:date/:station", (req, res) => {
     const { station, date } = req.params;
     const validStations = [6, 20, 106, 2004, 4439];
 
@@ -194,7 +194,7 @@ app.get("/api/select/:date/:station", (req, res) => {
 
 
 
-app.get("/api/aod/avg/:station/:datestart/:dateend", (req, res) => {
+app.get("/aod/api/aod/avg/:station/:datestart/:dateend", (req, res) => {
     const { station, datestart, dateend } = req.params;
     const validStations = [6, 20, 106, 2004, 4439];
 
@@ -263,7 +263,7 @@ app.get("/api/aod/avg/:station/:datestart/:dateend", (req, res) => {
 
 
 
-app.get("/api/aod/hour/allstation/:datestart", (req, res) => {
+app.get("/aod/api/aod/hour/allstation/:datestart", (req, res) => {
     const { datestart } = req.params;
 
     // const sql = `
