@@ -350,7 +350,7 @@ const aod_hour_API = async (date) => {
 
     try {
         const station = 2004;
-        const url = `/aod/api/select/${date}/${station}`;
+        const url = `http://localhost:3000/api/select/${date}/${station}`;
         const response = await axios.get(url);
 
         if (response.status === 200) {
@@ -419,6 +419,7 @@ const aod_day_API = async (dateobject) => {
 
 //     try {
 //         const station = 106;
+//         const url = `http://localhost:3000/api/aod/${station}/avg/daily`;
 //         const response = await axios.get(url);
 
 //         if (response.status === 200) {

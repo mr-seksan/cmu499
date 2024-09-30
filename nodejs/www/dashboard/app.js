@@ -30,8 +30,144 @@ document.addEventListener('DOMContentLoaded', async function () {
     datePicker_chart_hour()
     // chart_circle()   
 
-    widget();
+    widget(firstupdateData);
+
+
+
+    DataTable_hour(data_all_station_API)
+
+
+
+
+    // const selectedTime = random_time();
+    // findDataByTime(selectedTime);
+
+
 });
+
+const stationNames = {
+    106: 'RMUTL',
+    2004: 'Engineering CMU',
+    6: 'Maehia CMU',
+    4439: 'Uniserv CMU'
+};
+
+
+// ฟังก์ชันสุ่มเวลา
+const random_time = () => {
+    const times = ['07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00'];
+    const randomIndex = Math.floor(Math.random() * times.length);
+    const selectedTime = times[randomIndex];
+    return selectedTime;
+};
+
+
+
+
+// // ฟังก์ชันค้นหาข้อมูลจาก API ตามเวลาที่สุ่มได้
+// const findDataByTime = (time) => {
+//     const results = data_all_station_API.filter(entry => entry.time === time);
+
+//     if (results.length > 0) {
+//         console.log(`Data for time ${time}:`);
+//         results.forEach(result => {
+//             console.log(`Station: ${stationNames[result.station]} (${result.station})`);
+//             console.log(`Date: ${result.date}`);
+//             console.log(`AOD: ${result.aod}`);
+//             console.log(`Image: ${result.image_name}`);
+//             console.log('----------------------------');
+
+
+//         });
+//     } else {
+//         console.log(`No data found for time ${time}.`);
+//     }
+// };
+
+
+
+
+const DataTable_hour = (data) => {
+    const stationNames = {
+        106: 'RMUTL',
+        2004: 'Engineering CMU',
+        6: 'Maehia CMU',
+        4439: 'Uniserv CMU'
+    };
+
+    const tbody = document.getElementById('table-body');
+    tbody.innerHTML = '';
+
+    const getImagePath = (image_name, date) => {
+        const [camera, timestamp] = image_name.split('_');
+        return `/image_download/${camera}/${date.replace(/-/g, '_')}/${image_name}`;
+    };
+
+    const dataTableData = data.map(item => [
+        stationNames[item.station] || item.station,
+        item.date,
+        item.time,
+        item.aod,
+        `<img class="clickable-image" src="${getImagePath(item.image_name, item.date)}" alt="${item.image_name}" width="60px" height="60px" />`
+    ]);
+
+    dataTableData.forEach(rowData => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${rowData[0]}</td>
+            <td>${rowData[1]}</td>
+            <td>${rowData[2]}</td>
+            <td>${rowData[3]}</td>
+            <td>${rowData[4]}</td>
+        `;
+        tbody.appendChild(row);
+    });
+
+    // ใช้ event delegation แทน
+    tbody.addEventListener('click', function (event) {
+        if (event.target.classList.contains('clickable-image')) {
+            const modalImage = document.getElementById('modal-image');
+            modalImage.src = event.target.src; // เปลี่ยน src ของภาพใน modal
+            document.getElementById('my_modal_7').checked = true; // เปิด modal
+        }
+    });
+
+    if ($.fn.DataTable.isDataTable('#example')) {
+        $('#example').DataTable().clear().rows.add(dataTableData).draw();
+    } else {
+        new DataTable('#example', {
+            data: dataTableData,
+            columns: [
+                { title: 'Station' },
+                { title: 'Date' },
+                { title: 'Time' },
+                { title: 'AOD' },
+                { title: 'Image' }
+            ],
+            pageLength: 5,
+            lengthChange: false,
+            dom: 'Bfrtip',
+            tableClass: 'table-center',
+            language: {
+                paginate: {
+                    previous: 'ย้อนกลับ',
+                    next: 'ถัดไป'
+                }
+            }
+        });
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -192,6 +328,7 @@ window.addEventListener('load', updateProgressCircle);
 
 //     try {
 //         const station = 106;
+//         const url = `http://localhost:3000/api/select/${date}/${station}`;
 //         const response = await axios.get(url);
 
 //         if (response.status === 200) {
@@ -387,29 +524,8 @@ const datepicker = async (date) => {
         let dateobj = { 'datestart': date }
         const aod_date = await all_station_API(dateobj);
         chart_hour(aod_date);
-        // if (aod_date === null) {
+        DataTable_hour(aod_date)
 
-        // } else {
-
-
-        //     console.log(data_all_station_API);
-
-        //     if (data_all_station_API && data_all_station_API.length > 0) {
-
-
-        //         if (data_all_station_API[0].status === 'empty') {
-        //             chart_hour(data_all_station_API);
-
-
-        //         } else {
-        //             chart_hour(data_all_station_API);
-
-        //         }
-        //     } else {
-        //         console.error('globalData is empty or undefined');
-        //     }
-
-        // }
 
 
     } catch (error) {
@@ -901,17 +1017,17 @@ const convert_date_format = async (data) => {
     }
 };
 
-const widget = async () => {
+const widget = async (data) => {
 
     try {
-        var data = await firstupdateData;
+        // var data = await firstupdateData;
         var data = await convert_remark(data)
         var data = await convert_date_format(data)
         var data_difference = await aod_differenceData;
 
         data.forEach(item => {
 
-            // console.log(item);
+            console.log(item);
             const differenceData = data_difference.find(diff => diff.station === item.station);
             if (differenceData) {
                 item.difference = differenceData.difference;

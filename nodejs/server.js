@@ -6,10 +6,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 
-// const { api } = require('./api')
-// app.use(api);
 
-const port = 3000
 
 
 const pg = new Pool({
@@ -17,10 +14,12 @@ const pg = new Pool({
     user: 'postgres',
     password: "1234",
     database: "154499",
-    port: 5436 //5436 5432
+    port: 5432
 });
-app.use(express.json());
 
+
+
+app.use(express.json());
 
 app.use('/aod', express.static('www'))
 
@@ -29,9 +28,7 @@ app.get("/aod/api/", (req, res) => {
 })
 
 
-// const fc = require("./api")
-// const { api, a, b, c } = require("./api")
-// app.use(api)
+
 app.get("/aod/api/database/", (req, res) => {
     let sql = `SELECT id, station, date, time, image_name, aod::float FROM db_data ORDER BY date, time`;
     pg.query(sql)
@@ -173,7 +170,8 @@ app.get("/aod/api/select/:date/:station", (req, res) => {
         return;
     }
 
-    const sql = `SELECT station, date, time, image_name, aod::float FROM db_data WHERE station = $1 AND date = $2 ORDER BY date DESC, time DESC;`;
+    // const sql = `SELECT station, date, time, image_name, aod::float FROM db_data WHERE station = $1 AND date = $2 ORDER BY date DESC, time DESC;`;
+    const sql = `SELECT station, date, time, image_name, aod::float FROM db_data WHERE station = $1 AND date = $2 ORDER BY date , time;`;
 
     pg.query(sql, [station, date])
         .then(r => {
@@ -229,7 +227,8 @@ app.get("/aod/api/aod/avg/:station/:datestart/:dateend", (req, res) => {
 
 
 
-
+// const { api } = require('./api')
+// app.use(api);
 
 
 // dashboard
@@ -265,14 +264,6 @@ app.get("/aod/api/aod/avg/:station/:datestart/:dateend", (req, res) => {
 
 app.get("/aod/api/aod/hour/allstation/:datestart", (req, res) => {
     const { datestart } = req.params;
-
-    // const sql = `
-    //     SELECT station, date, time, image_name, ROUND(aod, 2) AS aod
-    //     FROM db_data
-    //     WHERE date::date BETWEEN $1 AND $2
-    //     ORDER BY date ASC;
-    // `;
-
     const sql = `
         SELECT station, date, time, image_name, ROUND(aod, 2) AS aod FROM db_data WHERE date = $1 ORDER BY date, time;
     `;
@@ -293,9 +284,9 @@ app.get("/aod/api/aod/hour/allstation/:datestart", (req, res) => {
 
 
 
-
+const port = 3000
 app.listen(port, () => {
-    console.log(`http://localhost:${port}`)
+    console.log(`http://localhost:3300/aod/index.html`)
 })
 
 

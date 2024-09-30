@@ -350,7 +350,7 @@ const aod_hour_API = async (date) => {
 
     try {
         const station = 4439;
-        const url = `/aod/api/select/${date}/${station}`;
+        const url = `http://localhost:3000/api/select/${date}/${station}`;
         const response = await axios.get(url);
 
         if (response.status === 200) {

@@ -409,30 +409,7 @@ const aod_day_API = async (dateobject) => {
 
 
 
-// const aod_dayily_API = async (date) => {
 
-//     if (typeof date === 'string') {
-//         date = date;
-//     } else {
-//         date = checkdate();
-//     }
-
-//     try {
-//         const station = 106;
-//         const url = `http://localhost:3000/api/aod/${station}/avg/daily`;
-//         const response = await axios.get(url);
-
-//         if (response.status === 200) {
-//             const resultAPI = response.data
-//             const data = await convert_date_format(resultAPI);
-
-//             return data;
-//         }
-
-//     } catch (error) {
-//         return nulldata;
-//     }
-// }
 
 
 // ---------------------------------  convert_remark  --------------------------------- //

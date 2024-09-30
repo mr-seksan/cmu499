@@ -2,10 +2,10 @@ version: '3.3'
 services:
   postgres:
     image: postgres
-    container_name: score_postgis
+    container_name: postgres
     restart: always
     environment:
-      # - POSTGRES_DB=maindb
+      # - POSTGRES_DB=154499
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=1234
     volumes:
@@ -15,17 +15,15 @@ services:
 
   nodejs:
     image: node
-    container_name: score_nodejs
-    working_dir: /app/nodejs
+    container_name: nodejs
+    working_dir: /nodejs
     restart: always
     depends_on:
       - postgres
     environment:
       - NODE_ENV=production
     volumes:
-      - ./nodejs:/app/nodejs
+      - ./nodejs:/nodejs
     ports:
       - 3300:3000
     command: bash -c "npm i && npm i -g nodemon && npm i -g pm2 && nodemon server.js"
-
-# test
